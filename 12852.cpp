@@ -1,5 +1,7 @@
 /*
 https://www.acmicpc.net/problem/12852
+pre dp 테이블의 경로를 저장하는 배열
+1로만들기 10의 경우 경로는 [10 9 3 1]
 
 */
 #include <bits/stdc++.h>
