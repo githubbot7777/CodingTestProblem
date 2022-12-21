@@ -28,7 +28,7 @@ int main() {
     for (int st = 0; st < n; st++)
     {
         while (en < n && a[en] - a[st] < m)en++;
-        if (en == n)break;//en이 범위를 벗어날시 종료
+        if (en == n)break;//en이 범위를 벗어날시 종료!!
         mn = min(mn, a[en] - a[st]);
     }
     cout << mn;
