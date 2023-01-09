@@ -16,7 +16,7 @@ int find(int x) {
 bool is_diff_group(int u, int v) {
     u = find(u); v = find(v);
     if (u == v)return 0;
-    if (p[u] < p[v])p[u] = v;
+    if (u < v)p[u] = v;
     else p[v] = u;
     return 1;
 }
