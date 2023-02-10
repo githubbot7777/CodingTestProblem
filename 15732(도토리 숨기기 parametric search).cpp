@@ -1,8 +1,8 @@
 
 #include<bits/stdc++.h>
 
-//Ή®Α¦ https://www.acmicpc.net/problem/15732
-//Ό³Έν https://dlwnsdud205.tistory.com/178
+//https://www.acmicpc.net/problem/15732
+//μ„¤λª… https://dlwnsdud205.tistory.com/178
 
 
 using namespace std;
