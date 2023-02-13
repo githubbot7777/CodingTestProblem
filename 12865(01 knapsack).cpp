@@ -3,6 +3,7 @@
 //¼³¸íhttps://www.youtube.com/watch?v=nLmhmB6NzcM&t=1460s
 //v[price,weight]
 //v[i,w]=max(v[i-1,w],v[i-1,w-w[i]]+p[i])
+
 #define V first
 #define W second
 using namespace std;
