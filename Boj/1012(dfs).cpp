@@ -1,86 +1,65 @@
-/*
-https://www.acmicpc.net/problem/1012
-*/
-
-
+//https://www.acmicpc.net/problem/1012
 #include <bits/stdc++.h>
-
 using namespace std;
+
 #define X first
 #define Y second
-/*
 
-*/
-
-int t, y, x, k;
-int board[52][52];
-vector<pair<int,int>> locations;
-int dx[4] = { 0,1,-1,0 };
-int dy[4] = { 1,0,0,-1 };
-int result = 0;
-
-void dfs(int cx,int cy)
+int board[51][51];
+int vis[51][51];
+int dx[4] = { 1,0,-1,0 };
+int dy[4] = { 0,1,0,-1 };
+int m, n, k;
+queue <pair<int, int >> q;
+void bfs(int x, int y)
 {
-   
-    stack<pair<int, int>> s;
-    if (board[cx][cy] == 0)
-        return;
-
-    result++;
-    board[cx][cy] = 0;
-    s.push({ cx,cy });
-
-    while (!s.empty())
+    vis[x][y] = 1;
+    q.push({ x,y });
+    while (!q.empty())
     {
-        pair<int, int> cur = s.top();
-        s.pop();
+        auto cur = q.front(); q.pop();
         for (int i = 0; i < 4; i++)
         {
             int nx = cur.X + dx[i];
             int ny = cur.Y + dy[i];
-            if (nx < 0 || nx >= x || ny < 0 || ny >= y)continue;
-            if (!board[nx][ny])continue;
-            board[nx][ny] = 0;
-            //cout << "(" << nx << " " << ny << ")\n";
-            s.push({ nx,ny });
-
+            if (nx < 0 || ny < 0 || nx >= n || ny >= m)continue;
+            if (vis[nx][ny] || !board[nx][ny])continue;
+            vis[nx][ny] = 1;
+            q.push({ nx,ny });
         }
     }
-   
 }
 
-int main() {
-    ios_base::sync_with_stdio(0);
+
+int main(void) {
+    ios::sync_with_stdio(0);
     cin.tie(0);
+    int t;
     cin >> t;
-    vector<int> answers;
     while (t--)
     {
-        memset(board, 0, sizeof(board[0][0]) * 52 * 52);
-        locations.clear();
-        result = 0;
-        cin >> y >> x >> k;
-        for (int i = 0; i < k; i++)
+        cin >> m >> n >> k;
+        while (k--)
         {
-            int tx, ty;
-            cin >> ty >> tx;
-            locations.push_back({ tx,ty });
-            board[tx][ty] = 1;
+            int x, y;
+            cin >> y >> x;
+            board[x][y] = 1;
         }
-
-        for (int i = 0; i < locations.size(); i++)
+        int answer = 0;
+        for (int i = 0; i < n; i++)
         {
-            dfs(locations[i].X, locations[i].Y);
+            for (int j = 0; j < m; j++)
+            {
+                if (board[i][j] == 1 && !vis[i][j])
+                {
+                    answer++;
+                    bfs(i, j);
+                }
+            }
         }
-
-        answers.push_back(result);
-       
+        cout << answer<<'\n';
+        memset(board, 0, sizeof(board));
+        memset(vis, 0, sizeof(vis));
     }
-    for (int i = 0; i < answers.size(); i++)
-        cout << answers[i] << "\n";
-   
-        return 0;
+    return 0;
 }
-
-
-
