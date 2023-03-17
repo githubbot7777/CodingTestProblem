@@ -18,7 +18,7 @@ void init()
     memset(vis, 0, sizeof(vis));
     memset(vis_f, 0, sizeof(vis_f));
 }
-   
+
 void bfs_f(queue<pair<int, int>>& Q)
 {
 
@@ -48,7 +48,7 @@ void pr_visit()
         }
         cout << '\n';
     }
-     cout << "visit\n";
+    cout << "visit\n";
     for (int i = 0; i < h; i++)
     {
         for (int j = 0; j < w; j++)
@@ -60,7 +60,7 @@ void pr_visit()
 }
 void bfs(queue<pair<int, int>>& Q)
 {
- 
+
     while (!Q.empty())
     {
         auto [cx, cy] = Q.front(); Q.pop();
@@ -73,7 +73,7 @@ void bfs(queue<pair<int, int>>& Q)
                 cout << vis[cx][cy] << '\n';
                 return;
             }
-        
+
             if (board[nx][ny] == '.' && !vis[nx][ny])
             {
                 if (vis_f[nx][ny] > vis[cx][cy] + 1 || vis_f[nx][ny] == 0)
@@ -82,13 +82,13 @@ void bfs(queue<pair<int, int>>& Q)
                     Q.push({ nx,ny });
                 }
             }
-          
+
         }
     }
-    
 
-        cout << "IMPOSSIBLE" << '\n';
-   
+
+    cout << "IMPOSSIBLE" << '\n';
+
 }
 int main(void) {
     ios::sync_with_stdio(0);
@@ -106,7 +106,7 @@ int main(void) {
             {
                 char c;
                 cin >> c;
-                board[i][j]=c;
+                board[i][j] = c;
                 if (c == '@')
                 {
                     Q.push({ i,j });
@@ -115,14 +115,14 @@ int main(void) {
 
                 if (c == '*')
                 {
-                   QF.push({ i,j });
-                   vis_f[i][j] = 1;
+                    QF.push({ i,j });
+                    vis_f[i][j] = 1;
                 }
             }
         }
-       bfs_f(QF);
-       bfs(Q);
-      // pr_visit();
+        bfs_f(QF);
+        bfs(Q);
+        // pr_visit();
     }
     return 0;
 }
