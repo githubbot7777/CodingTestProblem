@@ -1,2 +1,3 @@
-# boj-solving
-backjoon problem solving
+# CodingTestProblem
+
+Online judging problem solving
