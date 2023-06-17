@@ -21,7 +21,7 @@ int solution(vector<int> queue1, vector<int> queue2) {
     //다시 원래대로 돌려 놓으면 len(q1)*2 소요
     ll limit=queue1.size()*4;
     
-    list<int> l1(queue1.begin(),queue1.end());
+    list<int> l1(queue1.begin(),queue1.end());//queue를 list로 변환
     list<int> l2(queue2.begin(),queue2.end());
 
     while(1)
