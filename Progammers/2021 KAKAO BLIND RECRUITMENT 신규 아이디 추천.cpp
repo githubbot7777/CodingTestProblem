@@ -13,10 +13,12 @@ string solution(string new_id) {
     }
 
     // step2
+    //알파벳 대소문자, 숫자, 온점, 언더바, 빼기 제외
     regex re("[^A-Za-z0-9._-]");
     new_id = regex_replace(new_id, re, "");
 
     // step3
+    //온점 1회이상 매치
     regex re1("\\.+");
     new_id = regex_replace(new_id, re1, ".");
 
