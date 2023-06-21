@@ -1,0 +1,25 @@
+--문제:https://school.programmers.co.kr/learn/courses/30/lessons/131534
+SELECT
+    YEAR(SALES_DATE) AS YEAR,
+    MONTH(SALES_DATE) AS MONTH,
+    COUNT(DISTINCT USER_ID) AS PURCHASED_USERS,
+    ROUND(
+        COUNT(DISTINCT USER_ID) / 
+        (
+            SELECT COUNT(DISTINCT USER_ID)
+            FROM USER_INFO
+            WHERE YEAR(JOINED) = '2021'
+        )
+    , 1) AS PURCHASED_RATIO
+FROM 
+    ONLINE_SALE
+RIGHT JOIN 
+    USER_INFO USING (USER_ID)
+WHERE 
+    YEAR(JOINED) = '2021'
+GROUP BY
+    YEAR, MONTH
+HAVING 
+    YEAR IS NOT NULL
+ORDER BY 
+    YEAR, MONTH;
