@@ -1,54 +1,46 @@
 ﻿//programmers.co.kr/learn/courses/30/lessons/43164#
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-vector<vector<string>> tickets;
-int vis[10005];
-int n;
 vector<string> answer;
-
-bool is_end_trip()
+vector<bool> visited;
+bool check=false;
+void dfs(string cur, int cnt, vector<vector<string>>&t)
 {
-    for (int i = 0; i < n; i++)
-    {
-        if (vis[i] == 0)
-            return false;
-    }
-    return true;
-}
-
-bool dfs(string cur)
-{
-    if (is_end_trip())
-        return true;
-
-    for (int i = 0; i < n; i++)
-    {
-        string st = tickets[i][0];
-        string en = tickets[i][1];
-        if (st == cur && !vis[i])
-        {
-            vis[i] = 1;
-            answer.push_back(en);
-            bool judge = dfs(en);
-            if (judge)
-                return true;
-            //티켓을 다 쓸 수 없다면 방문처리 해체, 리스트에서 제거
-            vis[i] = 0;
-            answer.pop_back();
-        }
-    }
-    return false;
+   if(cnt==t.size())
+   {
+       check=true;
+   }
+   answer.push_back(cur);
+    
+   for(int i=0;i<t.size();i++){
+       string fr=t[i][0];
+       string to=t[i][1];
+       
+       if(!visited[i]&&fr==cur)
+       {
+            visited[i]=true; 
+            dfs(to,cnt+1,t);
+           
+          if(!check)
+         {
+           answer.pop_back();
+           visited[i]=false;
+         }
+           
+       }     
+   }
 }
 
 
-vector<string> solution(vector<vector<string>> t) {
-    tickets = t;
-    n = tickets.size();
-    sort(tickets.begin(), tickets.end());
-    answer.push_back("ICN");
-    dfs("ICN");
-
+vector<string> solution(vector<vector<string>> tickets) {
+    for(int i=0;i<tickets.size();i++)
+        visited.push_back(false);
+   
+    sort(tickets.begin(),tickets.end());
+   
+   dfs("ICN",0,tickets);
+   
     return answer;
 }
